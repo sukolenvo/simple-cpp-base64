@@ -1,0 +1,16 @@
+name: ci
+on:
+  pull_request:
+  release:
+    types: [published]
+  push:
+    tags:
+    branches:
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: verify format
+        run: make clang-format-check
