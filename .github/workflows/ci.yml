@@ -31,7 +31,7 @@ jobs:
         with:
           submodules: true
       - name: Configure CMake
-        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}}
+        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}}
         env:
           CC: gcc-12
           CXX: g++-12
