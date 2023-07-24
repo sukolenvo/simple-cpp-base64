@@ -40,3 +40,9 @@ jobs:
       - name: Test and coverage
         working-directory: ./build
         run: ctest . --output-on-failure
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' }}
+        with:
+          files: |
+            build/simple-base64-*
