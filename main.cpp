@@ -31,5 +31,6 @@ int main(int argc, char** argv) {
   } else {
     std::cout << simple_cpp::base64::encode(input);
   }
-  return 0;
+  std::cout << std::endl;
+  return EXIT_SUCCESS;
 }
