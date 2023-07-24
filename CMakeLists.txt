@@ -18,8 +18,8 @@ add_subdirectory(vendor/Catch2)
 add_subdirectory(test)
 include(CTest)
 
-add_test(base64-tool-encode simple-base64 test)
+add_test(NAME base64-tool-encode COMMAND simple-base64-tool test)
 set_property(TEST base64-tool-encode PROPERTY PASS_REGULAR_EXPRESSION dGVzdA==)
 
-add_test(base64-tool-decode simple-base64 d dGVzdA==)
+add_test(NAME base64-tool-decode COMMAND simple-base64-tool d dGVzdA==)
 set_property(TEST base64-tool-decode PROPERTY PASS_REGULAR_EXPRESSION test)
