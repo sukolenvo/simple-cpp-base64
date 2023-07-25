@@ -22,7 +22,7 @@ constexpr auto buildDecodeAlphabet() {
   return result;
 }
 
-std::array<char, 64> encodeAlphabet = buildEncodeAlphabet();
-std::array<char, 256> decodeAlphabet = buildDecodeAlphabet();
+constinit std::array<char, 64> encodeAlphabet = buildEncodeAlphabet();
+constinit std::array<char, 256> decodeAlphabet = buildDecodeAlphabet();
 
 }
