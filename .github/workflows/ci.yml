@@ -64,7 +64,7 @@ jobs:
       - name: Configure CMake
         run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}}
       - name: Build
-        run: cmake --build ./build -- -j 2
+        run: cmake --build ./build -- /MP 2
       - name: Test and coverage
         working-directory: ./build
         run: ctest . --output-on-failure
