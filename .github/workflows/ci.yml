@@ -67,7 +67,7 @@ jobs:
         run: cmake --build ./build -- /m
       - name: Test and coverage
         working-directory: ./build
-        run: ctest . --output-on-failure
+        run: ctest . --output-on-failure -C ${{matrix.build-type}}
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' }}
