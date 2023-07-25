@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project(simple-cpp-base64 VERSION 0.2)
+project(simple-cpp-base64 VERSION 0.2.1)
 
 cmake_policy(SET CMP0048 NEW)
 add_library(simple-cpp-compiler_options INTERFACE)
