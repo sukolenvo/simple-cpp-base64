@@ -15,9 +15,9 @@ constexpr auto buildEncodeAlphabet() {
 
 constexpr auto buildDecodeAlphabet() {
   std::array<char, 256> result{0};
-  auto encodeAlphabet = buildEncodeAlphabet();
-  for (size_t i = 0; i < encodeAlphabet.size(); ++i) {
-    result[encodeAlphabet[i]] = static_cast<char>(i);
+  const auto encodeAlphabetLocal = buildEncodeAlphabet();
+  for (size_t i = 0; i < encodeAlphabetLocal.size(); ++i) {
+    result[encodeAlphabetLocal[i]] = static_cast<char>(i);
   }
   return result;
 }
