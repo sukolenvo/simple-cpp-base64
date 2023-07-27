@@ -45,7 +45,7 @@ include(FetchContent)
 FetchContent_Declare(
     simple-cpp-base64
     GIT_REPOSITORY https://github.com/sukolenvo/simple-cpp-base64.git
-    GIT_TAG        v0.2
+    GIT_TAG        v0.2.2
 )
 
 FetchContent_MakeAvailable(simple-cpp-base64)
