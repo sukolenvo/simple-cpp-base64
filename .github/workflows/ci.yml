@@ -1,6 +1,5 @@
 name: ci
 on:
-  pull_request:
   release:
     types: [published]
   push:
@@ -26,15 +25,24 @@ jobs:
         build-type:
           - Debug
           - Release
+        compiler:
+          - cpp: g++-12
+            c: gcc-12
+        include:
+          - os: ubuntu-22.04
+            build-type: Debug
+            compiler:
+              cpp: clang++-14
+              c: clang-14
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
       - name: Configure CMake
-        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON
+        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }}
         env:
-          CC: gcc-12
-          CXX: g++-12
+          CC: ${{matrix.compiler.c}}
+          CXX: ${{matrix.compiler.cpp}}
       - name: Build
         run: cmake --build ./build -- -j 2
       - name: Test and coverage
