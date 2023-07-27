@@ -43,7 +43,7 @@ jobs:
         run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }}
         env:
           CC: ${{matrix.compiler.c}}
-          CXX: ${matrix.compiler.cpp}
+          CXX: ${{matrix.compiler.cpp}}
       - name: Build
         run: cmake --build ./build -- -j 2
       - name: Test and coverage
