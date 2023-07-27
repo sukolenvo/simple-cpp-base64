@@ -4,8 +4,8 @@
 
 #include "CLI/CLI.hpp"
 
-#include "encoder.hpp"
-#include "decoder.hpp"
+#include <encoder.hpp>
+#include <decoder.hpp>
 
 int main(int argc, char** argv) {
   CLI::App app{"Simple C++ base64 tool."};
