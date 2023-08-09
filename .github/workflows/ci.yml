@@ -41,7 +41,7 @@ jobs:
             build-type: Debug
             compiler:
               cpp: g++-12
-              c: g++-12
+              c: gcc-12
             shared: ON
     steps:
       - uses: actions/checkout@v3
