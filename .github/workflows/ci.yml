@@ -28,18 +28,27 @@ jobs:
         compiler:
           - cpp: g++-12
             c: gcc-12
+        shared:
+          - OFF
         include:
           - os: ubuntu-22.04
             build-type: Debug
             compiler:
               cpp: clang++-14
               c: clang-14
+            shared: OFF
+          - os: ubuntu-22.04
+            build-type: Debug
+            compiler:
+              cpp: g++-12
+              c: g++-12
+            shared: ON
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
       - name: Configure CMake
-        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }}
+        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }} -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
         env:
           CC: ${{matrix.compiler.c}}
           CXX: ${{matrix.compiler.cpp}}
@@ -65,12 +74,18 @@ jobs:
         build-type:
           - Debug
           - Release
+        shared:
+          - OFF
+        include:
+          - os: windows-2022
+            build-type: Debug
+            shared: ON
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
       - name: Configure CMake
-        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON
+        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
       - name: Build
         run: cmake --build ./build --config ${{matrix.build-type}} -- /m
       - name: Test and coverage
