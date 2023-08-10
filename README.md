@@ -30,25 +30,25 @@ std::cout << simple_cpp::base64::encode("sample input");
 
 ## Cmake integration
 
-### Git submodule 
-Checkout project as a Git submodule, then update `CMakeLists.txt`:
-```cmake
-add_subdirectory(vendor/simple-cpp-base64)
-
-target_link_libraries(target simple-cpp-base64::lib) 
-```
-
-### FetchContent
+### FetchContent (recommended)
 ```cmake
 include(FetchContent)
 
 FetchContent_Declare(
     simple-cpp-base64
     GIT_REPOSITORY https://github.com/sukolenvo/simple-cpp-base64.git
-    GIT_TAG        v1.0
+    GIT_TAG        v1.0.1
 )
 
 FetchContent_MakeAvailable(simple-cpp-base64)
+
+target_link_libraries(target simple-cpp-base64::lib) 
+```
+
+### Git submodule 
+Checkout project as a Git submodule, then update `CMakeLists.txt`:
+```cmake
+add_subdirectory(vendor/simple-cpp-base64)
 
 target_link_libraries(target simple-cpp-base64::lib) 
 ```

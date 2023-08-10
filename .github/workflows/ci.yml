@@ -45,8 +45,6 @@ jobs:
             shared: ON
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Configure CMake
         run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }} -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
         env:
@@ -82,8 +80,6 @@ jobs:
             shared: ON
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Configure CMake
         run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
       - name: Build
