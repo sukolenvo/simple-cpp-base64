@@ -32,13 +32,13 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   FetchContent_Declare(
       CLI11
       GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-      GIT_TAG 291c58789c031208f08f4f261a858b5b7083e8e2 #2.3.2
+      GIT_TAG v2.3.2
       GIT_SHALLOW TRUE
   )
   FetchContent_Declare(
       Catch2
       GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-      GIT_TAG 6e79e682b726f524310d55dec8ddac4e9c52fb5f #3.4.0
+      GIT_TAG v3.4.0
       GIT_SHALLOW TRUE
   )
   FetchContent_MakeAvailable(CLI11 Catch2)
