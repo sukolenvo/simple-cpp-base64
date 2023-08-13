@@ -3,8 +3,6 @@ on:
   release:
     types: [published]
   push:
-    tags:
-    branches:
 
 jobs:
   lint:
@@ -29,7 +27,7 @@ jobs:
           - cpp: g++-12
             c: gcc-12
         shared:
-          - OFF
+          - ON
         include:
           - os: ubuntu-22.04
             build-type: Debug
@@ -42,7 +40,7 @@ jobs:
             compiler:
               cpp: g++-12
               c: gcc-12
-            shared: ON
+            shared: OFF
     steps:
       - uses: actions/checkout@v3
       - name: Configure CMake
