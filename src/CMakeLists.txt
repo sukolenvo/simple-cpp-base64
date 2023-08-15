@@ -4,7 +4,10 @@ if (BUILD_SHARED_LIBS)
   set(LIB_TYPE SHARED)
 endif ()
 include(GenerateExportHeader)
-add_library(simple-cpp-base64-lib ${LIB_TYPE} alphabet.cpp encoder.cpp decoder.cpp)
+
+file(GLOB source base64/*.cpp)
+
+add_library(simple-cpp-base64-lib ${LIB_TYPE} ${source})
 target_link_libraries(simple-cpp-base64-lib PRIVATE simple-cpp-base64-compiler_options)
 target_include_directories(simple-cpp-base64-lib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(simple-cpp-base64-lib PUBLIC ${CMAKE_CURRENT_BINARY_DIR})

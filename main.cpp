@@ -2,10 +2,9 @@
 #include <iostream>
 #include <fstream>
 
+#include <base64/encoder.hpp>
+#include <base64/decoder.hpp>
 #include "CLI/CLI.hpp"
-
-#include <encoder.hpp>
-#include <decoder.hpp>
 
 int main(int argc, char** argv) {
   CLI::App app{"Simple C++ base64 tool."};
@@ -31,6 +30,6 @@ int main(int argc, char** argv) {
   } else {
     std::cout << simple_cpp::base64::encode(input);
   }
-  std::cout << std::endl;
+  std::cout << '\n';
   return EXIT_SUCCESS;
 }

@@ -1,7 +1,7 @@
 #include <string>
 
-#include <encoder.hpp>
-#include <decoder.hpp>
+#include <base64/encoder.hpp>
+#include <base64/decoder.hpp>
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size)
 {

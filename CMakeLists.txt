@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project(simple-cpp-base64 VERSION 1.0.1)
+project(simple-cpp-base64 VERSION 2.0.0)
 
 cmake_policy(SET CMP0048 NEW)
 
@@ -25,7 +25,7 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 endif ()
 
-add_subdirectory(src/base64)
+add_subdirectory(src)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(FetchContent)
@@ -44,7 +44,12 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   FetchContent_MakeAvailable(CLI11 Catch2)
 
   add_executable(simple-base64-tool main.cpp)
-  target_link_libraries(simple-base64-tool CLI11::CLI11 simple-cpp-base64-lib simple-cpp-base64-compiler_options)
+  if (NOT BUILD_SHARED_LIBS)
+    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+      set(LINK_FLAGS -static)
+    endif ()
+  endif ()
+  target_link_libraries(simple-base64-tool CLI11::CLI11 simple-cpp-base64-lib simple-cpp-base64-compiler_options ${LINK_FLAGS})
   set_target_properties(simple-base64-tool PROPERTIES OUTPUT_NAME simple-base64-${CMAKE_PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR})
 
   enable_testing()
