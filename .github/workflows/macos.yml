@@ -36,6 +36,11 @@ jobs:
             shared: ON
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Cpp
+        uses: aminya/setup-cpp@v0.26.2
+        if: ${{ matrix.compiler.c == 'clang'}}
+        with:
+          compiler: llvm-15
       - name: Configure CMake
         run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }} -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
         env:
