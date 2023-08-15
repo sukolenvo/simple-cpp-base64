@@ -45,7 +45,7 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
   add_executable(simple-base64-tool main.cpp)
   if (NOT BUILD_SHARED_LIBS)
-    if (NOT MSVC)
+    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
       set(LINK_FLAGS -static)
     endif ()
   endif ()
