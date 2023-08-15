@@ -3,8 +3,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include <decoder.hpp>
-#include <encoder.hpp>
+#include <base64/decoder.hpp>
+#include <base64/encoder.hpp>
 
 TEST_CASE("encode-decode")
 {

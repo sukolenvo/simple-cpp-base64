@@ -23,7 +23,7 @@ input
 ## Library usage
 
 ```cpp
-#include <decoder.hpp>
+#include <base64/encoder.hpp>
 
 std::cout << simple_cpp::base64::encode("sample input");
 ```
@@ -37,7 +37,7 @@ include(FetchContent)
 FetchContent_Declare(
     simple-cpp-base64
     GIT_REPOSITORY https://github.com/sukolenvo/simple-cpp-base64.git
-    GIT_TAG        v1.0.1
+    GIT_TAG        v2.0.0
 )
 
 FetchContent_MakeAvailable(simple-cpp-base64)

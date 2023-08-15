@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project(simple-cpp-base64 VERSION 1.0.2)
+project(simple-cpp-base64 VERSION 2.0.0)
 
 cmake_policy(SET CMP0048 NEW)
 
@@ -25,7 +25,7 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 endif ()
 
-add_subdirectory(src/base64)
+add_subdirectory(src)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(FetchContent)
@@ -47,7 +47,6 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   if (NOT BUILD_SHARED_LIBS)
     if (MSVC)
       set_property(TARGET simple-base64-tool PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-      set_property(TARGET simple-cpp-base64-lib PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
     else ()
       set(LINK_FLAGS -static)
     endif ()
