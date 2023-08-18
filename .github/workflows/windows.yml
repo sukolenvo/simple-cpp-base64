@@ -38,4 +38,4 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' }}
         with:
           files: |
-            build/${{matrix.build-type}}/simple-base64-*
+            build/bin/${{matrix.build-type}}/simple-base64-*
