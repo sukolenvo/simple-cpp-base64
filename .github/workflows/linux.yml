@@ -1,7 +1,7 @@
 name: Linux
 on:
   release:
-    types: [published]
+    types: [ published ]
   push:
     paths-ignore:
       - '.github/workflows/macos.yml'
@@ -26,6 +26,7 @@ jobs:
         compiler:
           - cpp: g++-12
             c: gcc-12
+            gcovExecutable: gcov-12
         shared:
           - OFF
         include:
@@ -38,7 +39,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Configure CMake
-        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}} -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }} -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
+        run: >
+          cmake -S . -B ./build
+          -DCMAKE_BUILD_TYPE:STRING=${{matrix.build-type}}
+          -DSIMPLE_CPP_BASE64_WARNINGS_AS_ERRORS:BOOL=ON
+          -DSIMPLE_CPP_BASE64_FUZZ_TESTING:BOOL=${{ startsWith(matrix.compiler.cpp, 'clang') }}
+          -DBUILD_SHARED_LIBS:BOOL=${{matrix.shared}}
+          -DOPT_ENABLE_COVERAGE:BOOL=${{ matrix.compiler.gcovExecutable != '' && matrix.build-type == 'Debug' }}
         env:
           CC: ${{matrix.compiler.c}}
           CXX: ${{matrix.compiler.cpp}}
@@ -47,6 +54,12 @@ jobs:
       - name: Test and coverage
         working-directory: ./build
         run: ctest . --output-on-failure
+      - name: coverage
+        working-directory: ./build
+        if: ${{ matrix.compiler.gcovExecutable != '' && matrix.build-type == 'Debug' }}
+        run: |
+          sudo apt-get install -y gcovr
+          gcovr -r ../ -s --gcov-executable ${{ matrix.compiler.gcovExecutable }} -f ../src --xml coverage.xml
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' && matrix.shared == 'OFF' }}
