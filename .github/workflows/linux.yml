@@ -60,6 +60,12 @@ jobs:
         run: |
           sudo apt-get install -y gcovr
           gcovr -r ../ -s --gcov-executable ${{ matrix.compiler.gcovExecutable }} -f ../src --xml coverage.xml
+      - name: coverage-note
+        uses: sukolenvo/coverage-notes-action@master
+        continue-on-error: true
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          cobertura: build/coverage.xml
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' && matrix.shared == 'OFF' }}
